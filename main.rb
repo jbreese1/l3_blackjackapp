@@ -1,22 +1,38 @@
 require 'rubygems'
 require 'sinatra'
+require 'pry'
 
 set :port, 9494
 
-get '/home' do
-  "Welcome Home. It's Wednesday. Hey JOhny"
+get '/' do
+  if session[:player_name]
+    redirect '/bet'
+  else
+    redirect '/new_player'
+  end
+end
+
+get '/new_player' do
+  erb :name
+end
+
+post '/new_player' do
+  session[:player_name] = params[:player_name]
+  redirect '/bet'
+end
+
+get '/bet' do
+  binding.pry
+  erb :bet
+
 
 end
 
-get '/beaboss' do
-  "Yo son, I got this"
+post '/bet' do
+  session[:bet] = params[:bet]
+  redirect '/game'
 end
 
-get '/thugtemplate' do
-  erb :thug
+get '/game' do
 
-end
-
-get '/birdthug' do
-  erb :"user/thuglife"
 end
