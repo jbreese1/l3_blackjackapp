@@ -1,0 +1,44 @@
+form#hit {
+  float: left;
+  padding: 0px 20px;
+}
+
+form#stay {
+  float: left;
+  padding: 0px 20px;
+}
+
+img#card {
+  padding: 0px 5px 0px 0px;
+  width: 100px;
+}
+
+p#center {
+  text-align: center;
+}
+
+span#wallet {
+  font-weight: bold;
+}
+
+span#bet {
+  font-weight: bold;
+}
+
+form#new_hand {
+  float: right;
+}
+
+p#alert_box {
+ 
+}
+
+img#center{
+  display: block;
+  margin-left: auto;
+  margin-right: auto 
+}
+
+p#red {
+  color: red;
+}

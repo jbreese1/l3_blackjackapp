@@ -1,0 +1,15 @@
+<h3><%= session[:player_name] %>, how much do you want to cash in for chips?</h3>
+<% if @wallet_error %>
+  <div class="alert alert-error">
+  You need to put in a number greater than 0.
+  </div>
+<% end %>
+<% if session[:all_in] > 0 %>
+  <p id="red"> You've already lost <%= "$#{session[:all_in]}" %></p>
+<% end %>
+<form action="/wallet" method="post">
+  <input type="text" name="wallet" />
+  <br />
+  <input type="submit" class="btn" />
+
+</form>

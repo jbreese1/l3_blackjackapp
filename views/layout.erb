@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Black Jack</title>
+    <title>Blackjack</title>
     <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/application.css">
   </head>
@@ -11,7 +11,10 @@
       <div class="navbar-inner">
         <div class="container">
             <ul class="nav">
-              <li><a href="/">New Game</a></li>
+              <li><a href="/game/clear">New Game</a></li>
+              <% if end_of_hand %>
+                <li><a href="/game/new_hand">New Hand</a></li>
+              <% end %>
             </ul>
         </div>
       </div>

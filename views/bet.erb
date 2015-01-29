@@ -1,2 +1,16 @@
+<h3><%= session[:player_name] %>, how much do you want to bet this hand?</h3>
+<% if session[:bet_error] %>
+  <div class="alert alert-error">
+    <%="#{session[:bet_error_text]}"%>
+  </div>
+<% end %>
 
-Hi <%= session[:player_name] %>!
+<div>
+  <p>You have $<%= "#{session[:wallet]}"%> to bet.</p>
+</div>
+<form action="/bet" method="post">
+  <input type="text" name="bet" />
+  <br />
+  <input type="submit" class="btn" />
+
+</form>

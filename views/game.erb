@@ -1,0 +1,53 @@
+<% if session[:result] %>
+  <div class="alert">
+    <%= "#{session[:player_name]}, #{session[:result_text]}" %>
+    <form id="new_hand"action='/game/new_hand'><input type="submit" class="btn" value="New Hand"></form>
+  </div>
+<% end %>
+
+
+
+
+<div class="row">
+  <div class="well span8">
+    <h3>Dealers Cards:</h3> <br>
+    <% if session[:turn] == true %>
+      <p>
+        <img id ='card' src="/images/cards/cover.jpg" />
+        <%= card_image(session[:dealer_hand][1]) %> 
+      </p>
+    <% else %>
+      <p>
+        <% session[:dealer_hand].each do |card|  %>
+          <%= card_image(card) %> 
+        <% end %>
+        <p>Dealer's total is <%= "#{session[:dealer_total]}" %>
+      </p>
+    <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="well span8">
+    <h3>Your Cards:</h3> <br />
+    <p>
+        <% session[:player_hand].each do |card|  %>
+          <%= card_image(card) %>
+        <% end %>
+      <p>Your total is <%= "#{session[:player_total]}" %></p>
+    </p>
+  </div>
+  
+  <div class='well span3'>
+    <p>Total wallet: <span id="wallet"><%= "$#{session[:wallet]}"%></span></p>
+    <p>Bet this hand: <span id="bet"><%= "$#{session[:bet]}" %></span></p>
+  </div>
+  <% if session[:turn] %>
+    <div class='well span3'>
+    <p>
+        <p id="center">Would you like to hit or stay?</p>
+        <form id="hit" action="/game/player/hit" method="post"><input type="submit" name="player_move" class="btn btn-success btn-large" value="Hit"></form><form id="stay" action="/game/player/stay" method="post"><input type="submit" name="player_move" class="btn btn-warning btn-large" value="Stay"></form>
+    </p>
+  <% end %>
+    </div>
+</div>
