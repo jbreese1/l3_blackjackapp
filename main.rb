@@ -32,35 +32,38 @@ helpers do
       dealer_hand << deck.pop}
   end
 
-  def get_total(participant)
-      total = 0
-      ace = []
-      value_string = participant.map { |value| value[1] }
-      value_string.each do |string|
-        if string == "Ace"
-          ace.push(string)
-        else
-          if string.to_i == 0
-            total +=10
-          else
-            total += string.to_i
-          end
-        end
+
+  def get_total(cards)
+    arr = cards.map { |element| element[1] }
+    total = 0
+    arr.each do |v|
+      if v == "Ace"
+        total += 11
+      else
+        total += v.to_i == 0 ? 10 : v.to_i
       end
-      ace.count.times {
-        if total <= 10
-          total += 11
-        else
-          total += 1
-        end  
-      }
-      return total
+    end
+    arr.select {|element| element == "Ace"}.count.times do
+      break if total <= 21
+      total -= 10
+    end
+    total
+  end
+
+  def ace_correct(aces, total)
+    aces.count.times {
+      if total <= 10
+        total += 11
+      else
+        total += 1
+      end  
+    }
   end
 
   def compare_totals(player_cards, dealer_cards)
     player_total = get_total(player_cards)
     dealer_total = get_total(dealer_cards)
-    if player_total < 22 && dealer_total < 22 && player_total > dealer_total
+    if player_total < 22 && player_total > dealer_total
       return "you win!", 2
     elsif dealer_total > 22
       return "the dealer busted, you win!", 2
@@ -116,12 +119,9 @@ helpers do
   end
 
   def end_of_hand
-    if session[:player_name] && session[:wallet] && session[:bet] && session[:result]
-      return true
-    else
-      return false
-    end
+    session[:player_name] && session[:wallet] && session[:bet] && session[:result]
   end
+
 end
 
 before do
